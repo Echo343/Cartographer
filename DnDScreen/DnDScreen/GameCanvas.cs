@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using DnDScreen.WorldObjects;
-using DnDScreen.WorldObjects.Grids;
+using DnDScreen.WorldObjects.Grids.Cartesian;
 
 namespace DnDScreen
 {
@@ -13,13 +13,13 @@ namespace DnDScreen
 
         Matrix translateMatrix = new Matrix();
         Point startCursor = new Point();
-        PointF mouseLocation = new PointF();
+        //PointF mouseLocation = new PointF();
 
-        public PointF MouseLocation
-        {
-            get { return mouseLocation; }
-            set { mouseLocation = value; }
-        }
+        //public PointF MouseLocation
+        //{
+        //    get { return mouseLocation; }
+        //    set { mouseLocation = value; }
+        //}
 
         Matrix scaleMatrix = new Matrix();
         PointF zoomPoint = new PointF();
@@ -29,9 +29,7 @@ namespace DnDScreen
 
         Random rnd = new Random(2);
 
-        Grid mainGrid;
-        //TODO make this highlight a component of a grid
-        MouseHighlight mainGridHighlight;
+        Cartesian mainGrid;
 
         public GameCanvas()
         {
@@ -42,13 +40,12 @@ namespace DnDScreen
 
             //Move 0,0 to the center of the screen.
             translateMatrix.Translate(ClientSize.Width / 2, ClientSize.Height / 2);
-
-            mainGrid = new Grid(this);
-            mainGridHighlight = new MouseHighlight();
+            
+            mainGrid = new Cartesian(this, pictureBox);
+            mainGrid.EnableHighlight = true;
             gameWorld.Add(mainGrid);
-            //TODO have controls in Grid to control whether axes are drawn or not.
-            gameWorld.Add(new Axes(this));
-            gameWorld.Add(mainGridHighlight);
+            //TODO have controls in mainGrid to control whether axes are drawn or not.
+            gameWorld.Add(new CartesianAxes(this));
             for (int i = 1; i < 10; i++)
             {
                 Circle c = new Circle(new PointF(rnd.Next(400), rnd.Next(400)), rnd.Next(390) + 10);
@@ -66,7 +63,7 @@ namespace DnDScreen
             return worldTransformMatrix;
         }
 
-        private Graphics CreateGraphicsWithWorldTransform()
+        internal Graphics CreateGraphicsWithWorldTransform()
         {
             Graphics g = pictureBox.CreateGraphics();
             g.Transform = getWorldTransform();
@@ -128,23 +125,7 @@ namespace DnDScreen
                 PointF offsetPoint = (PointF)ptArr.GetValue(0);
                 translateMatrix.Translate(offsetPoint.X, offsetPoint.Y);
                 startCursor = e.Location;
-                mainGridHighlight.Visible = false;
                 pictureBox.Invalidate();
-            }
-            else if (true)
-            {
-                //TODO move this logic into the highlight and fire an event if changed
-                PointF[] ptArr = { new PointF(e.X, e.Y) };
-                CreateGraphicsWithWorldTransform().TransformPoints(CoordinateSpace.World, CoordinateSpace.Page, ptArr);
-                MouseLocation = ptArr[0];
-                float gridSize = mainGrid.GridSize;
-                PointF pos = new PointF((float)Math.Floor(ptArr[0].X / gridSize) * gridSize, (float)Math.Floor(ptArr[0].Y / gridSize) * gridSize);
-                RectangleF newMouseRectangle = new RectangleF(pos, new SizeF(gridSize, gridSize));
-                if (!newMouseRectangle.Equals(mainGridHighlight.HighlightRectangle))
-                {
-                    mainGridHighlight.HighlightRectangle = newMouseRectangle;
-                    pictureBox.Invalidate();
-                }
             }
         }
 
@@ -153,15 +134,6 @@ namespace DnDScreen
             if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
-            }
-        }
-
-        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (!mainGridHighlight.Visible)
-            {
-                mainGridHighlight.Visible = true;
-                pictureBox.Invalidate();
             }
         }
     }

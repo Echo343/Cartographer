@@ -5,9 +5,9 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace DnDScreen.WorldObjects.Grids
+namespace DnDScreen.WorldObjects.Grids.Cartesian
 {
-    class Axes : WorldGridObjectBase
+    class CartesianAxes : Grid
     {
         Pen axisPen = new Pen(Color.Black, 2f);
 
@@ -18,7 +18,7 @@ namespace DnDScreen.WorldObjects.Grids
             set { isVisible = value; }
         }
 
-        public Axes(GameCanvas canvas) //TODO pass in a camera object instead of the canvas, or make a camera interface
+        public CartesianAxes(GameCanvas canvas) //TODO pass in a camera object instead of the canvas, or make a camera interface
             : base(canvas)
         {
         }
@@ -38,6 +38,11 @@ namespace DnDScreen.WorldObjects.Grids
             g.FillEllipse(Brushes.Maroon, transformedPoints[1].X, base.Position.Y, -10, -10);
 #endif
             g.Restore(gs);
+        }
+
+        public override void DrawHighlight(Graphics g)
+        {
+            return;
         }
     }
 }

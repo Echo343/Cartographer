@@ -5,6 +5,7 @@ using System.Text;
 using System.Drawing;
 using DnDScreen.WorldObjects;
 using DnDScreen.WorldObjects.Grids;
+using DnDScreen.WorldObjects.Grids.Cartesian;
 using DnDScreen.Interfaces;
 
 namespace DnDScreen
@@ -12,8 +13,8 @@ namespace DnDScreen
     class GameWorld
     {
         private List<WorldObject> gameObjects = new List<WorldObject>();
-        private List<WorldGridObjectBase> gameGrids = new List<WorldGridObjectBase>();
-        private List<MouseHighlight> gameMouseHighlights = new List<MouseHighlight>();
+        private List<Grid> gameGrids = new List<Grid>();
+        //private List<MouseHighlight> gameMouseHighlights = new List<MouseHighlight>();
 
         public GameWorld()
         {
@@ -26,14 +27,14 @@ namespace DnDScreen
                 return;
             }
 
-            if (obj is WorldGridObjectBase)
+            if (obj is Grid)
             {
-                gameGrids.Add((WorldGridObjectBase)obj);
+                gameGrids.Add((Grid)obj);
             }
-            else if (obj is MouseHighlight)
-            {
-                gameMouseHighlights.Add((MouseHighlight)obj);
-            }
+            //else if (obj is MouseHighlight)
+            //{
+            //    gameMouseHighlights.Add((MouseHighlight)obj);
+            //}
             else
             {
                 gameObjects.Add(obj);
@@ -56,11 +57,11 @@ namespace DnDScreen
                     obj.Draw(g);
                 }
             }
-            foreach (IDrawable obj in gameMouseHighlights)
+            foreach (Grid obj in gameGrids)
             {
-                if (obj.Visible)
+                if (obj.EnableHighlight)
                 {
-                    obj.Draw(g);
+                    obj.DrawHighlight(g);
                 }
             }
         }
