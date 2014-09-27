@@ -69,6 +69,6 @@ namespace DnDScreen
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox;
+        public System.Windows.Forms.PictureBox pictureBox;
     }
 }

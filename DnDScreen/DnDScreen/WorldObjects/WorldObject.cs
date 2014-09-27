@@ -7,7 +7,7 @@ using DnDScreen.Interfaces;
 
 namespace DnDScreen.WorldObjects
 {
-    abstract class WorldObject
+    public abstract class WorldObject
     {
         private PointF position;
 

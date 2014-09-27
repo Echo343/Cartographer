@@ -9,8 +9,6 @@ namespace DnDScreen
 {
     public partial class GameCanvas : Form
     {
-        private GameWorld gameWorld = new GameWorld();
-
         Matrix translateMatrix = new Matrix();
         Point startCursor = new Point();
         //PointF mouseLocation = new PointF();
@@ -27,13 +25,12 @@ namespace DnDScreen
 
         const float SCALEFACTOR = .075f;
 
-        Random rnd = new Random(2);
+        GameWorld gameWorld = null;
 
-        Cartesian mainGrid;
-
-        public GameCanvas()
+        public GameCanvas(GameWorld gWorld)
         {
             InitializeComponent();
+            gameWorld = gWorld;
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
@@ -41,17 +38,7 @@ namespace DnDScreen
             //Move 0,0 to the center of the screen.
             translateMatrix.Translate(ClientSize.Width / 2, ClientSize.Height / 2);
             
-            mainGrid = new Cartesian(this, pictureBox);
-            mainGrid.EnableHighlight = true;
-            gameWorld.Add(mainGrid);
-            //TODO have controls in mainGrid to control whether axes are drawn or not.
-            gameWorld.Add(new CartesianAxes(this));
-            for (int i = 1; i < 10; i++)
-            {
-                Circle c = new Circle(new PointF(rnd.Next(400), rnd.Next(400)), rnd.Next(390) + 10);
-                //if (i > 1) c.Visible = false;
-                gameWorld.Add(c);
-            }
+            
         }
 
         private Matrix getWorldTransform()

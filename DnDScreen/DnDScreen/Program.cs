@@ -16,7 +16,8 @@ namespace DnDScreen
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GameCanvas());
+            DnDScreen.Controllers.Dnd controller = new Controllers.Dnd();
+            Application.Run(controller.view);
         }
     }
 }

@@ -10,7 +10,7 @@ using DnDScreen.Interfaces;
 
 namespace DnDScreen
 {
-    class GameWorld
+    public class GameWorld
     {
         private List<WorldObject> gameObjects = new List<WorldObject>();
         private List<Grid> gameGrids = new List<Grid>();
