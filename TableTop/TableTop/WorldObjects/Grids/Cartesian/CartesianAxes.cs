@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace DnDScreen.WorldObjects.Grids.Cartesian
+namespace TableTop.WorldObjects.Grids.Cartesian
 {
     class CartesianAxes : Grid
     {

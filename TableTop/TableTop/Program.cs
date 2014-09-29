@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DnDScreen
+namespace TableTop
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace DnDScreen
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            DnDScreen.Controllers.Dnd controller = new Controllers.Dnd();
+            TableTop.Controllers.Dnd controller = new Controllers.Dnd();
             Application.Run(controller.view);
         }
     }

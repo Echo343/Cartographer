@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using DnDScreen.WorldObjects;
-using DnDScreen.WorldObjects.Grids.Cartesian;
+using TableTop.WorldObjects;
+using TableTop.WorldObjects.Grids.Cartesian;
 
-namespace DnDScreen.Controllers
+namespace TableTop.Controllers
 {
     public class Dnd
     {
@@ -20,6 +20,7 @@ namespace DnDScreen.Controllers
         {
             view = new GameCanvas(gameWorld);
             view.Show();
+            //TODO why is the picturebox needed.
             mainGrid = new Cartesian(view, view.pictureBox);
             mainGrid.EnableHighlight = true;
             gameWorld.Add(mainGrid);

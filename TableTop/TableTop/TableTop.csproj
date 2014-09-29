@@ -8,11 +8,12 @@
     <ProjectGuid>{A66FD35D-F934-4363-892E-46CB19323BA5}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DnDScreen</RootNamespace>
-    <AssemblyName>DnDScreen</AssemblyName>
+    <RootNamespace>TableTop</RootNamespace>
+    <AssemblyName>TableTop</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>DnDScreen.Program</StartupObject>
+    <StartupObject>TableTop.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -73,7 +73,14 @@
     <Compile Include="Helpers\PointConverter.cs" />
     <Compile Include="Interfaces\IDrawable.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="WorldObjects\Cards\Card.cs" />
+    <Compile Include="WorldObjects\Cards\CardView.cs" />
+    <Compile Include="WorldObjects\Cards\Counter.cs" />
+    <Compile Include="WorldObjects\Cards\Stack.cs" />
+    <Compile Include="WorldObjects\Cards\Viewer.cs" />
+    <Compile Include="WorldObjects\Cards\Zone.cs" />
     <Compile Include="WorldObjects\Circle.cs" />
+    <Compile Include="WorldObjects\DrawableWorldObject.cs" />
     <Compile Include="WorldObjects\Grids\Cartesian\CartesianAxes.cs" />
     <Compile Include="WorldObjects\Grids\Cartesian\Cartesian.cs" />
     <Compile Include="WorldObjects\Grids\Grid.cs" />

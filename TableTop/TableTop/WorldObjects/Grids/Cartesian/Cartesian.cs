@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace DnDScreen.WorldObjects.Grids.Cartesian
+namespace TableTop.WorldObjects.Grids.Cartesian
 {
     class Cartesian : Grid
     {

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using DnDScreen.Interfaces;
+using TableTop.Interfaces;
 using System.Windows.Forms;
 
-namespace DnDScreen.WorldObjects.Grids.Cartesian
+namespace TableTop.WorldObjects.Grids.Cartesian
 {
     class MouseHighlight : WorldObject, IDrawable
     {

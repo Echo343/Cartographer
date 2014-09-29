@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-using DnDScreen.WorldObjects;
-using DnDScreen.WorldObjects.Grids;
-using DnDScreen.WorldObjects.Grids.Cartesian;
-using DnDScreen.Interfaces;
+using TableTop.WorldObjects;
+using TableTop.WorldObjects.Grids;
+using TableTop.WorldObjects.Grids.Cartesian;
+using TableTop.Interfaces;
 
-namespace DnDScreen
+namespace TableTop
 {
     public class GameWorld
     {

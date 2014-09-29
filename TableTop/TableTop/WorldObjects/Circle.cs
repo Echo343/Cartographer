@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
-using DnDScreen.Interfaces;
+using TableTop.Interfaces;
 
-namespace DnDScreen.WorldObjects
+namespace TableTop.WorldObjects
 {
     class Circle : WorldObject, IDrawable
     {

@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using DnDScreen.WorldObjects;
-using DnDScreen.WorldObjects.Grids.Cartesian;
+using TableTop.WorldObjects;
+using TableTop.WorldObjects.Grids.Cartesian;
 
-namespace DnDScreen
+namespace TableTop
 {
     public partial class GameCanvas : Form
     {
@@ -27,10 +27,10 @@ namespace DnDScreen
 
         GameWorld gameWorld = null;
 
-        public GameCanvas(GameWorld gWorld)
+        public GameCanvas(GameWorld gameWorld)
         {
             InitializeComponent();
-            gameWorld = gWorld;
+            this.gameWorld = gameWorld;
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;

@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-namespace DnDScreen
+namespace TableTop
 {
     partial class GameCanvas
     {

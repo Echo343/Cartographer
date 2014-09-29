@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using DnDScreen.Interfaces;
+using TableTop.Interfaces;
 
-namespace DnDScreen.WorldObjects.Grids
+namespace TableTop.WorldObjects.Grids
 {
     abstract class Grid : WorldObject, IDrawable
     {
