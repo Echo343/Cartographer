@@ -16,7 +16,8 @@ namespace TableTop
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            TableTop.Controllers.Dnd controller = new Controllers.Dnd();
+            TableTop.Controllers.CardTop controller = new Controllers.CardTop();
+            //TableTop.Controllers.Dnd controller = new Controllers.Dnd();
             Application.Run(controller.view);
         }
     }

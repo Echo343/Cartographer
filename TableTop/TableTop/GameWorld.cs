@@ -14,7 +14,6 @@ namespace TableTop
     {
         private List<WorldObject> gameObjects = new List<WorldObject>();
         private List<Grid> gameGrids = new List<Grid>();
-        //private List<MouseHighlight> gameMouseHighlights = new List<MouseHighlight>();
 
         public GameWorld()
         {
@@ -31,10 +30,6 @@ namespace TableTop
             {
                 gameGrids.Add((Grid)obj);
             }
-            //else if (obj is MouseHighlight)
-            //{
-            //    gameMouseHighlights.Add((MouseHighlight)obj);
-            //}
             else
             {
                 gameObjects.Add(obj);

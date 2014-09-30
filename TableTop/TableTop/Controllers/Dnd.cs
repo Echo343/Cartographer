@@ -9,12 +9,10 @@ using TableTop.WorldObjects.Grids.Cartesian;
 
 namespace TableTop.Controllers
 {
-    public class Dnd
+    public class Dnd : Controller
     {
-        GameWorld gameWorld = new GameWorld();
         Cartesian mainGrid;
         Random rnd = new Random(2);
-        public GameCanvas view;
 
         public Dnd()
         {

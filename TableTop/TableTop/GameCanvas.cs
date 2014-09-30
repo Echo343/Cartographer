@@ -32,8 +32,10 @@ namespace TableTop
             InitializeComponent();
             this.gameWorld = gameWorld;
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
+#if !CONSOLE
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
+#endif
 
             //Move 0,0 to the center of the screen.
             translateMatrix.Translate(ClientSize.Width / 2, ClientSize.Height / 2);
