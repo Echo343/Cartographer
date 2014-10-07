@@ -20,6 +20,7 @@ namespace TableTop.Controllers
 
             Zone testZone = new Zone();
             testZone.Name = "Bob";
+            testZone.Position = new System.Drawing.PointF(200, 100);
             Card testCard = new Card();
             testCard.Name = "Ace of Spades";
             testZone.Add(testCard);

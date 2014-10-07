@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using TableTop.Interfaces;
@@ -10,6 +11,14 @@ namespace TableTop.WorldObjects.Cards
     class Zone : DrawableWorldObject
     {
         List<IZoneEntity> cards = new List<IZoneEntity>();
+        private PointF sizeP = new PointF(500, 250);
+        PointF[] arrPoints;
+
+        public Zone()
+            : base()
+        {
+            arrPoints = new PointF[]{ sizeP };
+        }
 
         public String Name
         {
@@ -30,7 +39,17 @@ namespace TableTop.WorldObjects.Cards
 #if DEBUG
             Console.WriteLine("Zone");
 #endif
-            g.FillRectangle(Brushes.Blue, 0, 0, 500, 250);
+            GraphicsState gState = g.Save();
+            Matrix scaleM = new Matrix();
+            scaleM.Scale(1, 1);
+
+            scaleM.TransformPoints(arrPoints);
+
+            base.translationMatrix.Reset();
+            base.translationMatrix.Translate(this.Position.X, this.Position.Y);
+            g.MultiplyTransform(base.translationMatrix, MatrixOrder.Append);
+            g.FillRectangle(Brushes.Blue, 0, 0, arrPoints[0].X, arrPoints[0].Y);
+            //g.FillRectangle(Brushes.Blue, 0, 0, 500, 250);
 
             foreach (IDrawable e in cards)
             {
@@ -39,6 +58,7 @@ namespace TableTop.WorldObjects.Cards
                     e.Draw(g);
                 }
             }
+            g.Restore(gState);
         }
     }
 }

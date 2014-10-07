@@ -120,7 +120,7 @@ namespace TableTop
 
         private void GameCanvas_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Q)
             {
                 this.Close();
             }

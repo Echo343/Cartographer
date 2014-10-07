@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using TableTop.Interfaces;
+using System.Drawing.Drawing2D;
 
 namespace TableTop.WorldObjects
 {
     public abstract class WorldObject
     {
         private PointF position;
+
+        protected Matrix translationMatrix = new Matrix();
 
 #region Properties
 
