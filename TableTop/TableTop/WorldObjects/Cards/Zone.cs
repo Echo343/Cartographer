@@ -40,15 +40,15 @@ namespace TableTop.WorldObjects.Cards
             Console.WriteLine("Zone");
 #endif
             GraphicsState gState = g.Save();
-            Matrix scaleM = new Matrix();
-            scaleM.Scale(1, 1);
+            //Matrix scaleM = new Matrix();
+            //scaleM.Scale(1, 1);
 
-            scaleM.TransformPoints(arrPoints);
+            //scaleM.TransformPoints(arrPoints);
 
             base.translationMatrix.Reset();
             base.translationMatrix.Translate(this.Position.X, this.Position.Y);
-            g.MultiplyTransform(base.translationMatrix, MatrixOrder.Append);
-            g.FillRectangle(Brushes.Blue, 0, 0, arrPoints[0].X, arrPoints[0].Y);
+            g.MultiplyTransform(base.translationMatrix, MatrixOrder.Prepend);
+            g.FillRectangle(Brushes.Blue, 0, 0, 500, 250);
             //g.FillRectangle(Brushes.Blue, 0, 0, 500, 250);
 
             foreach (IDrawable e in cards)

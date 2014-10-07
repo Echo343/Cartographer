@@ -32,15 +32,15 @@ namespace TableTop.WorldObjects.Cards
             //g.DrawRectangle(Pens.Green, 10, 10, 50, 80);
 
             GraphicsState gState = g.Save();
-            Matrix scaleM = new Matrix();
-            scaleM.Scale(1, 1);
+            //Matrix scaleM = new Matrix();
+            //scaleM.Scale(1, 1);
 
-            scaleM.TransformPoints(arrPoints);
+            //scaleM.TransformPoints(arrPoints);
 
             base.translationMatrix.Reset();
             base.translationMatrix.Translate(this.Position.X, this.Position.Y);
-            g.MultiplyTransform(base.translationMatrix, MatrixOrder.Append);
-            g.DrawRectangle(Pens.Green, 0, 0, arrPoints[0].X, arrPoints[0].Y);
+            g.MultiplyTransform(base.translationMatrix, MatrixOrder.Prepend);
+            g.DrawRectangle(Pens.Green, 0, 0, 50, 100);
             //g.FillRectangle(Brushes.Blue, 0, 0, 500, 250);
 
             g.Restore(gState);
