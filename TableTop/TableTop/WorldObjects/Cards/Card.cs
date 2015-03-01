@@ -50,5 +50,15 @@ namespace TableTop.WorldObjects.Cards
             Console.WriteLine(Name);
 #endif
         }
+
+        public void Tap()
+        {
+
+        }
+
+        public void Untap()
+        {
+
+        }
     }
 }
