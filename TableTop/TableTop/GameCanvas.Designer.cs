@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-namespace DnDScreen
+namespace TableTop
 {
     partial class GameCanvas
     {
@@ -45,7 +45,6 @@ namespace DnDScreen
             this.pictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_Paint);
             this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
             this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
-            this.pictureBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseUp);
             // 
             // GameCanvas
             // 
@@ -70,6 +69,6 @@ namespace DnDScreen
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBox;
+        public System.Windows.Forms.PictureBox pictureBox;
     }
 }

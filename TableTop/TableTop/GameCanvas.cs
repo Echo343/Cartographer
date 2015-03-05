@@ -2,24 +2,22 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using DnDScreen.WorldObjects;
-using DnDScreen.WorldObjects.Grids;
+using TableTop.WorldObjects;
+using TableTop.WorldObjects.Grids.Cartesian;
 
-namespace DnDScreen
+namespace TableTop
 {
     public partial class GameCanvas : Form
     {
-        private GameWorld gameWorld = new GameWorld();
-
         Matrix translateMatrix = new Matrix();
         Point startCursor = new Point();
-        PointF mouseLocation = new PointF();
+        //PointF mouseLocation = new PointF();
 
-        public PointF MouseLocation
-        {
-            get { return mouseLocation; }
-            set { mouseLocation = value; }
-        }
+        //public PointF MouseLocation
+        //{
+        //    get { return mouseLocation; }
+        //    set { mouseLocation = value; }
+        //}
 
         Matrix scaleMatrix = new Matrix();
         PointF zoomPoint = new PointF();
@@ -27,34 +25,22 @@ namespace DnDScreen
 
         const float SCALEFACTOR = .075f;
 
-        Random rnd = new Random(2);
+        GameWorld gameWorld = null;
 
-        Grid mainGrid;
-        //TODO make this highlight a component of a grid
-        MouseHighlight mainGridHighlight;
-
-        public GameCanvas()
+        public GameCanvas(GameWorld gameWorld)
         {
             InitializeComponent();
+            this.gameWorld = gameWorld;
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
+#if !CONSOLE
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
+#endif
 
             //Move 0,0 to the center of the screen.
             translateMatrix.Translate(ClientSize.Width / 2, ClientSize.Height / 2);
-
-            mainGrid = new Grid(this);
-            mainGridHighlight = new MouseHighlight();
-            gameWorld.Add(mainGrid);
-            //TODO have controls in Grid to control whether axes are drawn or not.
-            gameWorld.Add(new Axes(this));
-            gameWorld.Add(mainGridHighlight);
-            for (int i = 1; i < 10; i++)
-            {
-                Circle c = new Circle(new PointF(rnd.Next(400), rnd.Next(400)), rnd.Next(390) + 10);
-                //if (i > 1) c.Visible = false;
-                gameWorld.Add(c);
-            }
+            
+            
         }
 
         private Matrix getWorldTransform()
@@ -66,7 +52,7 @@ namespace DnDScreen
             return worldTransformMatrix;
         }
 
-        private Graphics CreateGraphicsWithWorldTransform()
+        internal Graphics CreateGraphicsWithWorldTransform()
         {
             Graphics g = pictureBox.CreateGraphics();
             g.Transform = getWorldTransform();
@@ -128,40 +114,15 @@ namespace DnDScreen
                 PointF offsetPoint = (PointF)ptArr.GetValue(0);
                 translateMatrix.Translate(offsetPoint.X, offsetPoint.Y);
                 startCursor = e.Location;
-                mainGridHighlight.Visible = false;
                 pictureBox.Invalidate();
-            }
-            else if (true)
-            {
-                //TODO move this logic into the highlight and fire an event if changed
-                PointF[] ptArr = { new PointF(e.X, e.Y) };
-                CreateGraphicsWithWorldTransform().TransformPoints(CoordinateSpace.World, CoordinateSpace.Page, ptArr);
-                MouseLocation = ptArr[0];
-                float gridSize = mainGrid.GridSize;
-                PointF pos = new PointF((float)Math.Floor(ptArr[0].X / gridSize) * gridSize, (float)Math.Floor(ptArr[0].Y / gridSize) * gridSize);
-                RectangleF newMouseRectangle = new RectangleF(pos, new SizeF(gridSize, gridSize));
-                if (!newMouseRectangle.Equals(mainGridHighlight.HighlightRectangle))
-                {
-                    mainGridHighlight.HighlightRectangle = newMouseRectangle;
-                    pictureBox.Invalidate();
-                }
             }
         }
 
         private void GameCanvas_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.Escape || e.KeyCode == Keys.Q)
             {
                 this.Close();
-            }
-        }
-
-        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (!mainGridHighlight.Visible)
-            {
-                mainGridHighlight.Visible = true;
-                pictureBox.Invalidate();
             }
         }
     }

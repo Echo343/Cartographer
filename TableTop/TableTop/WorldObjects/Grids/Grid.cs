@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using DnDScreen.Interfaces;
+using TableTop.Interfaces;
 
-namespace DnDScreen.WorldObjects.Grids
+namespace TableTop.WorldObjects.Grids
 {
-    abstract class WorldGridObjectBase : WorldObject, IDrawable
+    abstract class Grid : WorldObject, IDrawable
     {
         private GameCanvas canvas;
 
@@ -17,6 +17,8 @@ namespace DnDScreen.WorldObjects.Grids
             get { return canvas; }
             set { canvas = value; }
         }
+
+        public bool EnableHighlight { get; set; }
 
         bool isVisible = true;
         public bool Visible
@@ -33,11 +35,14 @@ namespace DnDScreen.WorldObjects.Grids
             return transformedPoints;
         }
 
-        public WorldGridObjectBase(GameCanvas canvas)
+        public Grid(GameCanvas canvas)
         {
             Canvas = canvas;
+            EnableHighlight = false;
         }
 
         public abstract void Draw(Graphics g);
+
+        public abstract void DrawHighlight(Graphics g);
     }
 }

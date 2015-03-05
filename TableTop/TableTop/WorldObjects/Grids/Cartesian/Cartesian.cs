@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
-namespace DnDScreen.WorldObjects.Grids
+namespace TableTop.WorldObjects.Grids.Cartesian
 {
-    class Grid : WorldGridObjectBase
+    class Cartesian : Grid
     {
+        private MouseHighlight mouseHighlight;
         float gridSize = 100f;
 
         public float GridSize
@@ -32,9 +34,12 @@ namespace DnDScreen.WorldObjects.Grids
 
         Pen gridPen = Pens.DarkCyan;
 
-        public Grid(GameCanvas canvas)
+        public Cartesian(GameCanvas canvas, PictureBox drawingEvents)
             : base(canvas)
         {
+            mouseHighlight = new MouseHighlight(canvas, this);
+            drawingEvents.MouseMove += new MouseEventHandler(mouseHighlight.drawingCanvas_MouseMove);
+            drawingEvents.MouseUp += new MouseEventHandler(mouseHighlight.drawingCanvas_MouseUp);
         }
 
         public override void Draw(System.Drawing.Graphics g)
@@ -88,6 +93,14 @@ namespace DnDScreen.WorldObjects.Grids
                 current += gridSize;
                 //TODO make option to toggle this
                 if (current > -gridSize && current < gridSize) current += gridSize;
+            }
+        }
+
+        public override void DrawHighlight(Graphics g)
+        {
+            if (EnableHighlight)
+            {
+                mouseHighlight.Draw(g);
             }
         }
     }
